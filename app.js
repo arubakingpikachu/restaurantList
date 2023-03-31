@@ -1,10 +1,26 @@
 const express = require('express')
-const app = express()
+const mongoose=require('mongoose')
+const exphbs = require('express-handlebars')
+const restaurantList=require('./restaurant.json')
+
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const port = 3000
 
-const exphbs = require('express-handlebars')
+const app = express()
+mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true, useUnifiedTopology: true })
 
-const restaurantList=require('./restaurant.json')
+
+const db=mongoose.connection
+db.on('error', () => {
+  console.log('mongodb error!')
+})
+db.once('open',()=>{
+  console.log('mongodb connected!')
+})
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -19,8 +35,8 @@ app.get('/restaurants/:restaurants_id',(req,res)=>{
   const filterRestaurant=restaurantList.results.find(restaurant=>
     restaurant.id.toString()===req.params.restaurants_id
   )
-  res.render('show',{restaurant:filterRestaurant})
-})
+  res.render('show',{restaurant:filterRestaurant})}
+)
 
 app.get('/search',(req,res)=>{const keyword=req.query.keyword
   const restaurants=restaurantList.results.filter(restaurant=>{
