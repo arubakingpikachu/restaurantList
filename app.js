@@ -47,7 +47,14 @@ app.post('/restaurants',(req,res)=>{
   .catch(error => console.error(error))
 })
 
-
+app.get('/restaurants/:id',(req,res)=>{
+  const id=req.params.id
+  return restaurantData.findById(id)
+  .lean()
+  .then(restaurant=>res.render('show',{restaurant}))
+  .catch(error => console.error(error))
+  
+})
 
 
 app.listen(port,()=>{
