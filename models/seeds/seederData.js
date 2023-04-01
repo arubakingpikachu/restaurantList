@@ -24,7 +24,6 @@ db.once('open',()=>{
       image:restaurant.image,
       location:restaurant.location,
       phone:restaurant.phone,
-      google_map:restaurant.google_map,
       rating:restaurant.rating,
       description:restaurant.description
 
