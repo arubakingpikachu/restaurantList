@@ -41,9 +41,11 @@ app.get('/',(req,res)=>{
 app.get('/search',(req,res)=>{
   
   
-  
+
   const keywords=req.query.keyword
   const keyword=keywords.trim().toLowerCase()
+
+ 
 
   RestData.find()
   .lean()
@@ -56,9 +58,6 @@ app.get('/search',(req,res)=>{
   .catch(error => console.error(error))
   })//搜尋功能
   
-
-
-
 app.get('/restaurants/new',(req,res)=>{
   return res.render('new')
 })//新增頁面

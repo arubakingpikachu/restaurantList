@@ -1,4 +1,6 @@
-<form action="/restaurants/{{restaurant._id}}?_method=PUT" method="POST">
+<h1 class="mb-1 restaurant-show-title">編輯</h1>
+   <div class="container mt-5"  >
+  <form action="/restaurants/{{restaurant._id}}?_method=PUT" method="POST">
   <input type="text" placeholder="輸入餐廳名稱" name="name"value="{{restaurant.name}}">
   <button type="submit">EDIT</button>
   <input type="text" placeholder="輸入餐廳類別" name="category"value="{{restaurant.category}}">
@@ -9,8 +11,9 @@
   <button type="submit">EDIT</button>
   <input type="text" placeholder="輸入餐廳電話" name="phone"value="{{restaurant.phone}}">
   <button type="submit">EDIT</button>
-  <input type="text" placeholder="餐廳評價(5分為上限)" name="rating"value="{{restaurant.rating}}">
+  <input type="number" placeholder="餐廳評價(0-5分)" name="rating" step="0.1"min="0" max="5"value="{{restaurant.rating}}">
   <button type="submit">EDIT</button>
   <label for="description">關於這間餐廳的敘述</label>
 <textarea id="description" name="description"  rows="10" cols="20">{{restaurant.description}}</textarea><!--如果要在 textarea 中設定預設文字，直接將文字放在 <textarea>內容</textarea> 標籤之間即可。-->
-</form>
+  </form>
+</div>
