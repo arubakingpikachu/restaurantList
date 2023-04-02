@@ -47,7 +47,7 @@ app.post('/restaurants',(req,res)=>{
   restaurantData.create(req.body)
   .then(()=>{res.redirect('/')})
   .catch(error => console.error(error))
-})//新增頁面
+})//po出新增頁面
 
 app.get('/restaurants/:id',(req,res)=>{
   const id=req.params.id
@@ -72,9 +72,15 @@ app.put('/restaurants/:id',(req,res)=>{
     .then(() => res.redirect(`/restaurants/${id}`))
     .catch(error => console.log(error))
 
-})
+})//編輯條目
 
-
+app.delete('/restaurants/:id',(req,res)=>{
+  const id=req.params.id
+  return restaurantData.findById(id)
+  .then(restaurant=>restaurant.remove())
+  .then(()=>res.redirect('/'))
+  .catch(error => console.log(error))
+})//刪除條目
 
 
 
