@@ -3,6 +3,7 @@ const mongoose=require('mongoose')
 const exphbs = require('express-handlebars')
 const RestData=require('./models/restaurantData')
 const restaurantData = require('./models/restaurantData')
+const methodOverride = require('method-override') 
 
 
 if (process.env.NODE_ENV !== 'production') {
@@ -28,6 +29,7 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))//在 Express 中提供靜態檔案
 app.use(express.urlencoded({extended:true}))//使用 body-parser
+app.use(methodOverride('_method'))
 
 app.get('/',(req,res)=>{
   RestData.find()
@@ -45,7 +47,7 @@ app.post('/restaurants',(req,res)=>{
   restaurantData.create(req.body)
   .then(()=>{res.redirect('/')})
   .catch(error => console.error(error))
-})
+})//新增頁面
 
 app.get('/restaurants/:id',(req,res)=>{
   const id=req.params.id
@@ -54,7 +56,28 @@ app.get('/restaurants/:id',(req,res)=>{
   .then(restaurant=>res.render('show',{restaurant}))
   .catch(error => console.error(error))
   
+})//瀏覽特定畫面
+
+app.get('/restaurants/:id/edit',(req,res)=>{
+  const id=req.params.id
+  return restaurantData.findById(id)
+  .lean()
+  .then(restaurant=>res.render('edit',{restaurant}))
+  .catch(error => console.error(error))
+})//顯示編輯畫面
+
+app.put('/restaurants/:id',(req,res)=>{
+  const id = req.params.id
+  restaurantData.findByIdAndUpdate(id, req.body)
+    .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
+
 })
+
+
+
+
+
 
 
 app.listen(port,()=>{
