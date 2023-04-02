@@ -4,8 +4,6 @@ const exphbs = require('express-handlebars')
 const RestData=require('./models/restaurantData')
 const methodOverride = require('method-override') 
 
-
-
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -14,7 +12,6 @@ const port = 3000
 
 const app = express()
 mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true, useUnifiedTopology: true })
-
 
 const db=mongoose.connection
 db.on('error', () => {
@@ -40,12 +37,8 @@ app.get('/',(req,res)=>{
 
 app.get('/search',(req,res)=>{
   
-  
-
   const keywords=req.query.keyword
   const keyword=keywords.trim().toLowerCase()
-
- 
 
   RestData.find()
   .lean()
@@ -101,10 +94,6 @@ app.delete('/restaurants/:id',(req,res)=>{
   .then(()=>res.redirect('/'))
   .catch(error => console.log(error))
 })//刪除條目
-
-
-
-
 
 app.listen(port,()=>{
   console.log(`Express is listening on localhost:${port}`)
