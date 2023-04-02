@@ -2,8 +2,8 @@ const express = require('express')
 const mongoose=require('mongoose')
 const exphbs = require('express-handlebars')
 const RestData=require('./models/restaurantData')
-const restaurantData = require('./models/restaurantData')
 const methodOverride = require('method-override') 
+
 
 
 if (process.env.NODE_ENV !== 'production') {
@@ -38,20 +38,41 @@ app.get('/',(req,res)=>{
   .catch(error => console.error(error))
 })//純瀏覽
 
+app.get('/search',(req,res)=>{
+  
+  
+  
+  const keywords=req.query.keyword
+  const keyword=keywords.trim().toLowerCase()
+
+  RestData.find()
+  .lean()
+  .then(restaurantData=>{
+    const restaurants=restaurantData.filter(data=>{
+      return data.name.toLowerCase().includes(keyword)||data.category.includes(keyword)})
+    if(restaurants.length===0){res.render('wrong',{keywords:keywords})}
+    else{res.render('index', {restaurants:restaurants, keywords: keywords})}
+    })
+  .catch(error => console.error(error))
+  })//搜尋功能
+  
+
+
+
 app.get('/restaurants/new',(req,res)=>{
   return res.render('new')
 })//新增頁面
 
 app.post('/restaurants',(req,res)=>{
   console.log(req.body)
-  restaurantData.create(req.body)
+  RestData.create(req.body)
   .then(()=>{res.redirect('/')})
   .catch(error => console.error(error))
 })//po出新增頁面
 
 app.get('/restaurants/:id',(req,res)=>{
   const id=req.params.id
-  return restaurantData.findById(id)
+  return RestData.findById(id)
   .lean()
   .then(restaurant=>res.render('show',{restaurant}))
   .catch(error => console.error(error))
@@ -60,7 +81,7 @@ app.get('/restaurants/:id',(req,res)=>{
 
 app.get('/restaurants/:id/edit',(req,res)=>{
   const id=req.params.id
-  return restaurantData.findById(id)
+  return RestData.findById(id)
   .lean()
   .then(restaurant=>res.render('edit',{restaurant}))
   .catch(error => console.error(error))
@@ -68,7 +89,7 @@ app.get('/restaurants/:id/edit',(req,res)=>{
 
 app.put('/restaurants/:id',(req,res)=>{
   const id = req.params.id
-  restaurantData.findByIdAndUpdate(id, req.body)
+  RestData.findByIdAndUpdate(id, req.body)
     .then(() => res.redirect(`/restaurants/${id}`))
     .catch(error => console.log(error))
 
@@ -76,7 +97,7 @@ app.put('/restaurants/:id',(req,res)=>{
 
 app.delete('/restaurants/:id',(req,res)=>{
   const id=req.params.id
-  return restaurantData.findById(id)
+  return RestData.findById(id)
   .then(restaurant=>restaurant.remove())
   .then(()=>res.redirect('/'))
   .catch(error => console.log(error))
