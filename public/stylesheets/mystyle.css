@@ -2,11 +2,11 @@ header {
   overflow: hidden;
 }
 
-.flex-container{
+/*.flex-container{
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-}
+}*/
 
 .navbar .navbar-brand {
   color: #4592af;

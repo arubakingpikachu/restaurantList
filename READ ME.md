@@ -9,11 +9,31 @@
 6. 使用者能刪除任一餐廳。
 
 ## 安裝步驟
-1. 在終端機clone本專案。
+1. 確認已安裝npm、node.js、nodemon 。
+2. 在終端機clone本專案。
 ```
 git clone https://github.com/arubakingpikachu/restaurantList.git
 ```
-2. 
+3. 透過終端機打開restaurantList資料夾，輸入：
+```
+npm install
+```
+以安裝npm
+4. 以上開發工具安裝完畢後，輸入：
+```
+npm run dev
+```
+以開啟伺服器。
+5. 若見到以下訊息，即代表執行成功：
+```
+Express is listening on localhost:3000
+mongodb connected!
+
+```
+
+6. 在瀏覽器輸入http://localhost:3000，即可查看網站。
+7. 若欲暫停使用，在終端機輸入ctrl+c即可。
+
 
 
 
