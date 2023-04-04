@@ -8,6 +8,15 @@
 5. 使用者可以利用餐廳名、類別進行搜尋。
 6. 使用者能刪除任一餐廳。
 
+## 安裝步驟
+1. 在終端機clone本專案。
+```
+git clone https://github.com/arubakingpikachu/restaurantList.git
+```
+2. 
+
+
+
 
 ## 開發工具
 * Node.js v18.15.0
@@ -16,5 +25,6 @@
 * mongoose v5.9.7
 * method-override v3.0.0
 * Bootstrap v5.1.3
+* dotenv v16.0.3
 
     

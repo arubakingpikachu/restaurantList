@@ -20,6 +20,7 @@ db.once('open',()=>{
     restaurantData.create({
 
       name:restaurant.name,
+      name_en:restaurant.name_en,
       category:restaurant.category,
       image:restaurant.image,
       location:restaurant.location,

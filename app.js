@@ -81,19 +81,20 @@ app.get('/restaurants/:id/edit',(req,res)=>{
 
 app.put('/restaurants/:id',(req,res)=>{
   const id = req.params.id
-  RestData.findByIdAndUpdate(id, req.body)
+  RestData.findById(id)
+    .then( restaurant=>{return restaurant.update(req.body)})
     .then(() => res.redirect(`/restaurants/${id}`))
     .catch(error => console.log(error))
 
 })//編輯條目
 
 app.delete('/restaurants/:id',(req,res)=>{
-  const id=req.params.id
-  return RestData.findById(id)
-  .then(restaurant=>restaurant.remove())
-  .then(()=>res.redirect('/'))
-  .catch(error => console.log(error))
-})//刪除條目
+  const id=req.params.id  
+    return RestData.findById(id)
+    .then(restaurant=>restaurant.remove())
+    .then(()=>res.redirect('/'))
+    .catch(error => console.log(error))}
+)//刪除條目
 
 app.listen(port,()=>{
   console.log(`Express is listening on localhost:${port}`)
