@@ -45,4 +45,4 @@ router.delete('/:id', (req, res) => {
     .catch(error => console.log(error))
 })// 刪除條目
 
-module.exports=router
+module.exports = router

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')// 載入mongoose
 const restaurantData = require('../restaurantData')// 載入model
 const restaurantList = require('../../restaurant.json')// 載入種子資料
-const db=require('../../config/mongoose')
+const db = require('../../config/mongoose')
 
 const restaurant_list = restaurantList.results
 

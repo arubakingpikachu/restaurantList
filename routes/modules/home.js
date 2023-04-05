@@ -4,13 +4,17 @@ const RestData = require('../../models/restaurantData')
 const router = express.Router()
 
 router.get('/', (req, res) => {
+  
   RestData.find()
     .lean()
+    .collation({locale: "en"})
+    .sort({name_en: 'asc' })
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.error(error))
 })// 純瀏覽
 
 router.get('/search', (req, res) => {
+  console.log(req)
   const keywords = req.query.keyword
   const keyword = keywords.trim().toLowerCase()
 
@@ -25,4 +29,4 @@ router.get('/search', (req, res) => {
     .catch(error => console.error(error))
 })// 搜尋功能
 
-module.exports=router
+module.exports = router
