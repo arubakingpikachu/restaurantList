@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
 })// 純瀏覽
 
 router.get('/search', (req, res) => {
-  console.log(req)
   const keywords = req.query.keyword
   const keyword = keywords.trim().toLowerCase()
 

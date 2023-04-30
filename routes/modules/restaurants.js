@@ -7,7 +7,7 @@ router.get('/new', (req, res) => {
   return res.render('new')
 })// 新增頁面
 
-router.post('/', (req, res) => {
+router.post('/', (req,res) => {
   RestData.create(req.body)
     .then(() => { res.redirect('/') })
     .catch(error => console.error(error))
