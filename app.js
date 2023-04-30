@@ -4,6 +4,7 @@ const RestData = require('./models/restaurantData')
 const methodOverride = require('method-override')
 const routes = require('./routes')
 const session = require('express-session')
+const usePassport=require('./config/passport')
 require('./config/mongoose')
 
 const port = 3000
@@ -21,6 +22,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+usePassport(app)
 app.use(routes)
 
 app.listen(port, () => {
