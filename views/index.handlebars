@@ -1,3 +1,4 @@
+
 <div class="container search-bar">
   <div class="search-bar-outer">
     <div class="search-bar-inner">
@@ -15,6 +16,7 @@
 </div>
 
 <div class="container m-5">
+  <a class="btn btn-primary text-align" href="./restaurants/new"class="text-primary mb-3">create</a>
   <form action="/" method="get">
   <div class="sort-container">
     <label for="sortStyle">排列方式</label>
@@ -29,11 +31,13 @@
 </div>
 
 
+
 <div class="container mt-5">
     
   <div class="row">
     <div class="col-md-10 col-12 mx-auto"> 
       <div class="row row-cols-1 row-cols-sm-3">
+        
        {{#each restaurants}} 
         <div class="col">
           <div class="card m-1">
