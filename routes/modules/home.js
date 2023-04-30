@@ -4,8 +4,8 @@ const RestData = require('../../models/restaurantData')
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  
-  RestData.find()
+  const userId = req.user._id
+  RestData.find({userId})
     .lean()
     .collation({locale: "en"})
     .sort({name_en: 'asc' })
@@ -16,8 +16,8 @@ router.get('/', (req, res) => {
 router.get('/search', (req, res) => {
   const keywords = req.query.keyword
   const keyword = keywords.trim().toLowerCase()
-
-  RestData.find()
+  const userId = req.user._id
+  RestData.find({userId})
     .lean()
     .then(restaurantData => {
       const restaurants = restaurantData.filter(data => {
