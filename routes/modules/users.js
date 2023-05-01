@@ -29,9 +29,10 @@ router.post('/register',(req,res)=>{
   })}
   userData.findOne({email})
   .then(user=>{if(user){
-      errors.push({message:'G'})
-       res.render('register',{error,name,email,password,confirmPassword})
-  }else{userData.create({name,email,password})
+      errors.push({message:'這個email已註冊'})
+       res.render('register',{errors,name,email,password,confirmPassword})
+  }else{return bcrypt.genSalt(10).then(salt => bcrypt.hash(password, salt)).then(hash=>userData.create({name,email,password:hash}))
+  
   .then(() => res.redirect('/'))
   .catch(err => console.log(err))
 }
