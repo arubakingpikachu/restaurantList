@@ -1,8 +1,8 @@
 const express = require('express')
-const router = express.Router()
 const userData=require('../../models/user')
 const passport=require('passport')
-
+const bcrypt = require('bcryptjs')
+const router = express.Router()
 
 router.get('/login', (req, res) => {
   res.render('login')
@@ -16,45 +16,27 @@ router.get('/register', (req, res) => {
   res.render('register')})
 
 router.post('/register',(req,res)=>{
-  const {name,email,password,confirmPassword}=req.body
-  const errors = []
-  if(!email||!password||!confirmPassword){
-    errors.push({message:'email、password、confirmPassword為必填項!'})
-  }
-  if(password!==confirmPassword){
-    errors.push({message:'密碼與確認密碼不相符！'})
-  }
-  if(errors.length){
-    return res.render('register',{
+  const { name, email, password, confirmPassword } = req.body
+  const errors=[]
+  if(!email||!password||!confirmPassword){errors.push({message:'email、password、confirmPassword是必填的'})}
+  if (password !== confirmPassword) {errors.push({ message: '密碼與確認密碼不相符！' })}
+  if(errors.length){return res.render('register',{
       errors,
-      name:name,
-      email:email,
-      password:password,
-      confirmPassword:confirmPassword
-    })
-  }
+      name,
+      email,
+      password,
+      confirmPassword
+  })}
   userData.findOne({email})
-  .then(user=>{
-    if(user){
-      errors.push({message:'這組email已經註冊了'})
-      res.render('register',{
-        name:name,
-        email:email,
-        password:password,
-        confirmPassword:confirmPassword
-      })
-    }else{
-      return userData.create({
-        name:name,
-        email:email,
-        password:password,
-        
-      })
-      .then(()=>res.redirect('/'))
-      .catch(error => console.error(error))
-    }
+  .then(user=>{if(user){
+      errors.push({message:'G'})
+       res.render('register',{error,name,email,password,confirmPassword})
+  }else{userData.create({name,email,password})
+  .then(() => res.redirect('/'))
+  .catch(err => console.log(err))
+}
   })
-  .catch(error => console.error(error))
+  .catch(err => console.log(err))
 })
 
 
