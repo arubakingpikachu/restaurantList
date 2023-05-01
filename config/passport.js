@@ -1,6 +1,7 @@
 const passport = require('passport')
 const LocalStrategy=require('passport-local').Strategy
 const userData=require('../models/user')
+const bcrypt=require('bcryptjs')
 
 module.exports=app=>{
   app.use(passport.initialize())
@@ -11,8 +12,12 @@ module.exports=app=>{
       userData.findOne({ email })
       .then(user=>{
         if (!user) { return done(null, false,{ message: 'That email is not registered!'})}
-        if (user.password!==password){return done(null, false,{ message: 'That email is not registered!'})}
-        return done(null, user)
+        return bcrypt
+        .compare(password,user.password)
+        .then(isMatch=>{if (!isMatch){return done(null, false,{ message: 'Email or Password incorrect'}) 
+        }return done(null, user)
+    })
+        
       })
       .catch(error => console.error(error))
     }
