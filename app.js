@@ -8,7 +8,7 @@ const usePassport=require('./config/passport')
 const flash=require('connect-flash')
 require('./config/mongoose')
 
-const port = 3000
+const port = process.env.port
 
 const app = express()
 
@@ -19,7 +19,7 @@ app.use(express.static('public'))// 在 Express 中提供靜態檔案
 app.use(express.urlencoded({ extended: true }))// 使用 body-parser
 app.use(methodOverride('_method'))
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
