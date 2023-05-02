@@ -1,5 +1,6 @@
 # 我的餐廳清單
-
+![login](https://github.com/arubakingpikachu/restaurantList/blob/main/users_login.png)
+![index](https://github.com/arubakingpikachu/restaurantList/blob/main/index.png)
 ## 功能
 1. 在首頁瀏覽所有餐廳的相片、名稱、類別、評價。
 2. 使用者可新增餐廳資料。
