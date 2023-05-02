@@ -7,6 +7,9 @@
 4. 使用者可以修改各餐廳的資訊。
 5. 使用者可以利用餐廳名、類別進行搜尋。
 6. 使用者能刪除任一餐廳。
+7. 使用者可註冊帳號。
+8. 使用者可登入帳號，瀏覽、新增、刪除、修改帳號中餐廳資料。
+9. 使用者可使用facebook第三方登入。
 
 ## 安裝步驟
 1. 確認已安裝npm、node.js、nodemon 。
@@ -46,5 +49,18 @@ mongodb connected!
 * method-override v3.0.0
 * Bootstrap v5.1.3
 * dotenv v16.0.3
+* bcryptjs v2.4.3
+* connect-flash v0.1.1
+* express-session v1.17.1
+* passport v0.4.1
+* passport-facebook v3.0.0
+* passport-local v1.0.0
 
+## 示範帳號
+* user1
+email=user1@example.com
+password=12345678
+* user2
+email=user2@example.com
+password=12345678
     
